@@ -14,7 +14,6 @@ public class TimeMeasurementAspect {
 
 	private static final Logger LOG = Logger.getLogger("TimeMeasurementAspect");
 	
-	//@Around("firstService() || secondService()")
 	@Around("services()")
 	public void measure(ProceedingJoinPoint pjp) throws Throwable {
 		long start = System.currentTimeMillis();
@@ -22,17 +21,7 @@ public class TimeMeasurementAspect {
 		LOG.info(pjp.getTarget().getClass().getName() + " took " + (System.currentTimeMillis() - start));
 	}
 	
-//	@Pointcut("execution(* com.example.aop.aspect.services.FirstService.doSomething())")
-//	private void firstService() {
-//		
-//	}
-//	
-//	@Pointcut("execution(* com.example.aop.aspect.services.SecondService.doAnotherThing())")
-//	private void secondService() {
-//		
-//	}
-
-	@Pointcut("execution(* (@org.springframework.stereotype.Service *).*(..))")
+	@Pointcut("within(com.example.aop.aspect.services.*)")
 	public void services() {
 		
 	}
