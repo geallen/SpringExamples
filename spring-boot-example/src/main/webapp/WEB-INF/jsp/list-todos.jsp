@@ -5,7 +5,6 @@
 <title>First Web Application</title>
 </head>
 <body>
-<%-- 	Here are the list of your todos: ${todos.user} --%>
 	<BR /> Your Name is : ${name}
 	<BR />
 	<c:forEach var="todo" items="${todos}">
