@@ -7,10 +7,19 @@
 <body>
 	<BR /> Your Name is : ${name}
 	<BR />
+	<table border="1" cellpadding="10">
+	
 	<c:forEach var="todo" items="${todos}">
-		<li>${todo.user}</li>
-		<li>${todo.desc}</li>
-		<li>${todo.id}</li>
+	<tr>
+		<td>${todo.user}</td>
+		<td>${todo.desc}</td>
+		<td>${todo.id}</td>
+		<td>${todo.targetDate}</td>
+	</tr>
 	</c:forEach>
+	
+	</table>
+	<BR/>
+	<input type="button" onclick="location.href='/showTodo'" value="Add Todo" /> 
 </body>
 </html>
