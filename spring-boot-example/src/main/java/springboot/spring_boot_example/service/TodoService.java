@@ -3,7 +3,6 @@ package springboot.spring_boot_example.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,16 +39,33 @@ public class TodoService {
 	}
 	
 	public Todo createOrUpdateTodo(Todo todo) {
-		repository.save(todo);
+		
+	    repository.save(todo);
 		return todo;
 	}
 	
-	public void deleteTodoById(Long id) throws RecordNotFoundException {
-		Optional<Todo> deletedTodo = repository.findById(id);
+	public Todo updateTodo(int id, Todo todo) throws RecordNotFoundException {
+	    Todo updatedTodo = repository.findById(id).orElseThrow(() -> new RecordNotFoundException("No record found with id: "+ id));
 		
-		if(deletedTodo.isPresent()) {
-			repository.deleteById(id);
-		}
-		throw new RecordNotFoundException("No todo found with given id");
+	    updatedTodo.setDesc(todo.getDesc());
+	    updatedTodo.setUser(todo.getUser());
+	    repository.save(updatedTodo);
+		return updatedTodo;		
+	}
+	
+	public Todo editTodo(int id)  {
+	    Todo updatedTodo =repository.getOne(id);
+		return convertTodo(updatedTodo);
+		
+	}
+	
+	private Todo convertTodo(Todo todo) {
+		Todo newTodo = new Todo();
+		newTodo.setId(todo.getId());
+		newTodo.setDesc(todo.getDesc());
+		newTodo.setDone(todo.isDone());
+		newTodo.setTargetDate(todo.getTargetDate());
+		newTodo.setUser(todo.getUser());
+		return newTodo;
 	}
 }

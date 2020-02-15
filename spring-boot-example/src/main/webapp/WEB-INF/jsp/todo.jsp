@@ -11,7 +11,7 @@
         Description : <input name="desc" type="text" />
         <BR/>
         
-         <input type="submit" value="add" />
+         <input type="submit" value="Save" />
     </form>
 </body>
 </html>
