@@ -8,7 +8,7 @@
 	<BR /> Your Name is : ${name}
 	<BR />
 	<table border="1" cellpadding="10">
-	<tr><th>ID</th><th>User</th><th>Description </th><th>Target Date</th>
+	<tr><th>ID</th><th>User</th><th>Description </th><th>Target Date</th><th>Operations</th>
 	</tr>
 	<c:forEach var="todo" items="${todos}">
 	<tr>
