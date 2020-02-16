@@ -47,7 +47,6 @@ public class TodoController {
 
 	@RequestMapping(value= "/editTodo", method = RequestMethod.GET)
 	public String editTodo(ModelMap model, @RequestParam(value="id") String id, Map<String, Object> mo) throws NumberFormatException, RecordNotFoundException {
-		System.out.println("Here: " + id);
 		Todo updatedTodo = todoService.editTodo(Integer.parseInt(id));
 		mo.put("todo", updatedTodo);
 		return "editTodo";
@@ -55,8 +54,19 @@ public class TodoController {
 	
 	@RequestMapping(value="/update-todo", method= RequestMethod.POST)
 	public String updateTodo(String id, @ModelAttribute("todo") Todo todo) throws RecordNotFoundException {
-		System.out.println("id: " + id);
 		todoService.updateTodo(Integer.parseInt(id),todo);
+		return "redirect:/list-todos";
+	}
+	
+	@RequestMapping(value="/deleteTodoById", method= RequestMethod.GET)
+	public String deleteTodoById(String id) {
+		todoService.deleteTodoById(Integer.parseInt(id));
+		return "redirect:/list-todos";
+	}
+	
+	@RequestMapping(value="/deleteAll", method = RequestMethod.GET)
+	public String deleteAll() {
+		todoService.deleteAll();
 		return "redirect:/list-todos";
 	}
 }

@@ -19,14 +19,10 @@ public class TodoService {
 	@Autowired
 	TodoRepository repository;
 	
-	public void deleteTodo(int id) {
-		Iterator<Todo> iter =  todos.iterator();
-		while(iter.hasNext()) {
-			Todo currentTodo = iter.next();
-			if(currentTodo.getId() == id) {
-				iter.remove();
-			}
-		}
+	public void deleteTodoById(int id) {
+		
+		repository.deleteById(id);
+		
 	}
 	
 	public List<Todo> getAllTodos(){
@@ -67,5 +63,9 @@ public class TodoService {
 		newTodo.setTargetDate(todo.getTargetDate());
 		newTodo.setUser(todo.getUser());
 		return newTodo;
+	}
+	
+	public void deleteAll() {
+		repository.deleteAll();
 	}
 }
