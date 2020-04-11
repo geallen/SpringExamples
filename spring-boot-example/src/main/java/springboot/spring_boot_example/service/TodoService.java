@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import springboot.spring_boot_example.aspect.TrackTime;
 import springboot.spring_boot_example.dao.TodoRepository;
 import springboot.spring_boot_example.exception.RecordNotFoundException;
 import springboot.spring_boot_example.model.Todo;
@@ -24,7 +25,7 @@ public class TodoService {
 		repository.deleteById(id);
 		
 	}
-	
+	//@TrackTime
 	public List<Todo> getAllTodos(){
 		List<Todo> allTodoList = repository.findAll();
 		
@@ -34,6 +35,7 @@ public class TodoService {
 		return new ArrayList<Todo>();
 	}
 	
+	@TrackTime
 	public Todo createOrUpdateTodo(Todo todo) {
 		
 	    repository.save(todo);
