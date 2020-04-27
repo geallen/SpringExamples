@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import springboot.spring_boot_example.aspect.TrackTime;
 import springboot.spring_boot_example.exception.RecordNotFoundException;
 import springboot.spring_boot_example.model.Todo;
 import springboot.spring_boot_example.service.TodoService;
+
 
 @Controller
 @SessionAttributes("name")
@@ -37,6 +39,7 @@ public class TodoController {
 		return "todo";
 	}
 	
+	@TrackTime
 	@PostMapping(path = "/add-todo")
 	public String addTodo(ModelMap model, @ModelAttribute("todo") Todo todo) {
 		todo.setTargetDate(new Date());
